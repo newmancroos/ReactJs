@@ -1,0 +1,10 @@
+body {
+  background-color: #eee;
+  font-family: sans-serif;
+  padding: 20px;
+  margin: 0;
+  overflow: auto;
+}
+#container {
+  margin-bottom: 10px;
+}
