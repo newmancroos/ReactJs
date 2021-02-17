@@ -8,7 +8,9 @@ React uses One-way data flow or binding:
 •	Unidirectional data flow means that React is more performant than Angular
 •	React doesn’t have a mechanism to allow the HTML to change the component. The HTML can only raise events that the component responds to.
  
-
+<p>
+	React Complete course at https://www.youtube.com/watch?v=I6tbhNUU96Y
+</p>
 
  
 Create React App
