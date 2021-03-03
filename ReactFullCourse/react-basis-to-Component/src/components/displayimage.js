@@ -1,6 +1,6 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, useRef, useLayoutEffect} from 'react';
 import '../assets/css/style.css';
-
+import Image from './image';
 export default function DisplayImage() {
 
     
@@ -12,6 +12,38 @@ export default function DisplayImage() {
         "https://images.unsplash.com/photo-1613751521417-7953f4bf31a4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80"
     ])
 
+
+    //We can use core javascript inside react component. so we have to use UseRef
+    //1. Define const inputRef= useRef(null)
+    //2. assigna id to the input controll and ref={inputRef} now inputRef hold the reference of the input control
+    //3. Use inputRef.Current  will return the reference to the control so we can use .focus()
+    const inputRef = useRef(null);
+    const varRef  = useRef(0);
+    useEffect(() => {
+        //const inputBox = document.getElementById("inputBox");
+        //inputBox.focus();
+        inputRef.current.focus();
+    }, []);
+
+    //we should not use any Set state with in Useeffect that will cinfinatly updates the compponent
+    useEffect(() => {
+        //varRef.current = images.length;
+        varRef.current += 1;
+    });
+
+    useEffect(() => {
+        console.log("I'm updated 1")
+    });
+    //UseEffect doesn't wait for component did updated just fire before that
+    useLayoutEffect(() => {
+        console.log("I'm updated 2")
+    });
+    //when you call any function and display the result on the screen you can notice a flicker of screen
+    // but if you write the same code in useLayeffect you can notice the flickering because result will be picked before 
+    //component get updated and when component get update the result will be there
+    //and will be printed without any flickering
+
+
     const [newImageUrl, setNewImageUrl]=useState("");
 
     function handleRemove(index)
@@ -19,22 +51,11 @@ export default function DisplayImage() {
         //setImages(images.filter((image,i) => i !== index));
         setImages([...images.slice(0,index), ...images.slice(index+1, images.length)]);
     }
-    var [isHovering, setIsHovering] = useState(-1);
+    
     
     function ShowImage()
     {
-        return images.map((image, index) => {
-            return(
-            <div className="w-1/3 my-4 px-8 flex justify-center" key={index}  onMouseEnter={() => setIsHovering(index)} 
-            onMouseLeave={() => setIsHovering(-1)}>
-                <div className="relative">
-                    <i className={`fas fa-times absolute right-0 
-                                text-white opacity-25 hover:opacity-100 
-                                cursor-pointer ${isHovering === index ? "" : "hidden"}`}  onClick={()=>handleRemove(index)}></i>
-                    <img src={image} alt="test" width="350"/>
-                </div>
-            </div>
-        )})
+        return images.map((img, index) => <Image index={index} image={img} handleRemove={handleRemove} key={index} />);
     }
     function handleAdd()
     {
@@ -53,12 +74,13 @@ export default function DisplayImage() {
     }
     return (
         <section>
+            <h2>{varRef.current} times updated</h2>
             <div className = "flex flex-wrap justify-center bg-blue-800 w-10/12 mx-20">
                 <ShowImage />
             </div>
             <div className="flex justify-center my-5 w-10/12 mx-20">
                 <div className="w-full">
-                    <input type="text" className="p-2 border border-gray-800 rounded w-full" 
+                    <input id="inputBox" ref={inputRef} type="text" className="p-2 border border-gray-800 rounded w-full" 
                     value={newImageUrl}
                     onChange={handleChange} />
                 </div>
