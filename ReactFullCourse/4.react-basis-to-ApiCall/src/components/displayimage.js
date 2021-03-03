@@ -1,43 +1,59 @@
+import Axios from 'axios';
 import React,{useState, useEffect, useRef, useLayoutEffect} from 'react';
 import '../assets/css/style.css';
+import useScroll from '../utils/hooks/useScroll';
+import useFetchImage from '../utils/hooks/useFetchImage';
 import Image from './image';
 export default function DisplayImage() {
 
-    
-    const [images, setImages] =  useState([
-        "https://images.unsplash.com/photo-1576440956592-dca3975eb93c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-        "https://images.unsplash.com/photo-1612130679272-4b6a43e93311?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80",
-        "https://images.unsplash.com/photo-1537819191377-d3305ffddce4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=708&q=80",
-        "https://images.unsplash.com/photo-1613425269135-fb9f19ae7be8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-        "https://images.unsplash.com/photo-1613751521417-7953f4bf31a4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80"
-    ])
+    //const [images, setImages] =  useState([]);
+    //images now we get from useFetchImage hook
+    const [images, setImages] = useFetchImage()
 
+
+    //------------------Using user defined hook------------------------------
+        const scrollPosition = useScroll();
+    //------------------------------------------------------------------------
 
     //We can use core javascript inside react component. so we have to use UseRef
     //1. Define const inputRef= useRef(null)
     //2. assigna id to the input controll and ref={inputRef} now inputRef hold the reference of the input control
     //3. Use inputRef.Current  will return the reference to the control so we can use .focus()
     const inputRef = useRef(null);
-    const varRef  = useRef(0);
+    ////const varRef  = useRef(0);
     useEffect(() => {
         //const inputBox = document.getElementById("inputBox");
         //inputBox.focus();
         inputRef.current.focus();
+
+        //Move client_id to a environment file
+        // axios.get('https://api.unsplash.com/photos/?client_id=abSwcSg_UBFluFO6OC8loCRspIjHkjIycsk9bCYK144'
+        // ).then((res) => {
+        //     setImages(res.data);
+        // });
+        console.log(process.env.REACT_APP_UNSPLASH_KEY);
+
+        //Move it to useFetchImge Hook
+        // Axios.get(`${process.env.REACT_APP_UNSPLASH_URL}/?client_id=${process.env.REACT_APP_UNSPLASH_KEY}`
+        // ).then((res) => {
+        //     setImages(res.data);
+        // });
+
     }, []);
 
     //we should not use any Set state with in Useeffect that will cinfinatly updates the compponent
-    useEffect(() => {
-        //varRef.current = images.length;
-        varRef.current += 1;
-    });
+    // useEffect(() => {
+    //     //varRef.current = images.length;
+    //     varRef.current += 1;
+    // });
 
-    useEffect(() => {
-        console.log("I'm updated 1")
-    });
+    // useEffect(() => {
+    //     console.log("I'm updated 1")
+    // });
     //UseEffect doesn't wait for component did updated just fire before that
-    useLayoutEffect(() => {
-        console.log("I'm updated 2")
-    });
+    // useLayoutEffect(() => {
+    //     console.log("I'm updated 2")
+    // });
     //when you call any function and display the result on the screen you can notice a flicker of screen
     // but if you write the same code in useLayeffect you can notice the flickering because result will be picked before 
     //component get updated and when component get update the result will be there
@@ -55,7 +71,7 @@ export default function DisplayImage() {
     
     function ShowImage()
     {
-        return images.map((img, index) => <Image index={index} image={img} handleRemove={handleRemove} key={index} />);
+        return images.map((img, index) => <Image index={index} image={img.urls.regular} handleRemove={handleRemove} key={index} />);
     }
     function handleAdd()
     {
@@ -74,7 +90,13 @@ export default function DisplayImage() {
     }
     return (
         <section>
-            <h2>{varRef.current} times updated</h2>
+            {/* <h2>{varRef.current} times updated</h2> */}
+
+            {/* Using user defined Hook */}
+            <div className="fixed">
+                {scrollPosition}
+            </div>
+
             <div className = "flex flex-wrap justify-center bg-blue-800 w-10/12 mx-20">
                 <ShowImage />
             </div>
