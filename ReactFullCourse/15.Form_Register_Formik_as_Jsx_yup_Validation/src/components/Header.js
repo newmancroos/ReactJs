@@ -6,7 +6,8 @@ import AppContext from '../store/AppContext';
 export default function Header() {
   //const [isLoggedIn, setIsLoggedIn] = useState(false);
   const history = useHistory();
-  const [isLoggedIn, user] =  useContext(AppContext);
+  //we can also create a function as method so that from anywhere we can call and change the value
+  const [isLoggedIn, user, changeStatus] =  useContext(AppContext);
   
   function logout() {
     firebase
@@ -14,6 +15,7 @@ export default function Header() {
       .signOut()
       .then((res) => {
         //setIsLoggedIn(false);
+        changeStatus("newmancroos","Success");
         history.replace("/login");
       })
       .catch((e) => {

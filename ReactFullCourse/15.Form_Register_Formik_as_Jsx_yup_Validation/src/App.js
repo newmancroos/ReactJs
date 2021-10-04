@@ -26,10 +26,14 @@ function App() {
       }
     });
   }, []);
+  function test(name, lastname)
+  {
+    console.log(name + "-" + lastname);
 
+  }
   return (
       <Router> 
-        <AppContext.Provider value={[isLoggedIn, user]}>
+        <AppContext.Provider value={[isLoggedIn, user, test]}>
           <Header />
           <Switch>
             {
