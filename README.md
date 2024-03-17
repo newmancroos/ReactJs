@@ -160,5 +160,7 @@ class Head extends React.Component {
     )};
 }
 
+<h3><u>React-Redux Tutorial</u></h3>
+https://www.youtube.com/watch?v=upFPU1HWAUk
 
 
