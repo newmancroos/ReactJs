@@ -163,4 +163,6 @@ class Head extends React.Component {
 <h3><u>React-Redux Tutorial</u></h3>
 https://www.youtube.com/watch?v=upFPU1HWAUk
 
+## Redux funtionality:
 
+![image](https://github.com/user-attachments/assets/c7da4c7e-1c26-47f9-9fb1-7afb8e414fad)
