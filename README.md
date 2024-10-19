@@ -166,3 +166,7 @@ https://www.youtube.com/watch?v=upFPU1HWAUk
 ## Redux funtionality:
 
 ![image](https://github.com/user-attachments/assets/c7da4c7e-1c26-47f9-9fb1-7afb8e414fad)
+
+
+
+lodash - is a repository for small functions. We can install loadash  using the command : npm i lodash
