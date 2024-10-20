@@ -170,3 +170,16 @@ https://www.youtube.com/watch?v=upFPU1HWAUk
 
 
 lodash - is a repository for small functions. We can install loadash  using the command : npm i lodash
+
+
+Note :
+
+function parent(a)
+{
+    return function child(b)
+    {
+        console.log(a+b);
+    }
+}
+
+parent(2)(4)
