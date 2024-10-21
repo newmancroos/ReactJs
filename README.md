@@ -206,3 +206,14 @@ ex.
  this function may return different result for a number.
 
  In Redux, reducers should be pure function.
+
+## Immutable object
+In redux immutab;le object is a pillor of the Redux. How to create Immutable object in javascript
+ex.
+const person={
+name : "Newman"
+}
+
+const updatedPerson = {...person, name="Nithin"}
+
+here we copy person object and change the value of the name so we'll have a new object with differnt value.
