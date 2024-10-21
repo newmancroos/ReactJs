@@ -217,3 +217,4 @@ name : "Newman"
 const updatedPerson = {...person, name="Nithin"}
 
 here we copy person object and change the value of the name so we'll have a new object with differnt value.
+this is how redux maintains new state of the object and old states will be immutable.
