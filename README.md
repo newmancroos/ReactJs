@@ -193,7 +193,7 @@ When a function always returning same output for a same input is called Pure fun
 ex.
 	function(age)
  	{
-		return age > minAge
+		return age * 2
 	}
 
  this function always return same resule for a particular number. but
