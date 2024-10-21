@@ -182,4 +182,7 @@ function parent(a)
     }
 }
 
+const add = a => b => a+b;
+
 parent(2)(4)
+console.log(add(3)(4))
