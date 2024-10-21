@@ -173,6 +173,7 @@ lodash - is a repository for small functions. We can install loadash  using the 
 
 
 Note :
+currying function:
 
 function parent(a)
 {
