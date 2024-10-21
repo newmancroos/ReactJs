@@ -204,4 +204,5 @@ ex.
  }
 
  this function may return different result for a number.
- 
+
+ In Redux, reducers should be pure function.
