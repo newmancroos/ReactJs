@@ -173,7 +173,7 @@ lodash - is a repository for small functions. We can install loadash  using the 
 
 
 Note :
-currying function:
+##currying function:
 
 function parent(a)
 {
@@ -187,3 +187,21 @@ const add = a => b => a+b;
 
 parent(2)(4)
 console.log(add(3)(4))
+
+## Pure function
+When a function always returning same output for a same input is called Pure function
+ex.
+	function(age)
+ 	{
+		return age > minAge
+	}
+
+ this function always return same resule for a particular number. but
+
+ funcrtion randaomNumber(number)
+ {
+ 	return number * Math.random()
+ }
+
+ this function may return different result for a number.
+ 
