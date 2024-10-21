@@ -218,3 +218,20 @@ const updatedPerson = {...person, name="Nithin"}
 
 here we copy person object and change the value of the name so we'll have a new object with differnt value.
 this is how redux maintains new state of the object and old states will be immutable.
+
+If I have nested object in side a object when we use shadow operator we need to shadow copy nested object too. otherwise updating child object will update parent object.
+
+const person={
+name : "Newman"
+address:{
+	city:"Silver Spring",
+ 	Country:"USA"
+}
+}
+
+const updatedPerson = {...person}
+updatedPerson.City="Rockville
+will update person's city to Rockville, so we need to shadow copy child object as below,
+
+const updatedPerson = {...person, address:{...person.address, city:Rockville}, name:"Nithin"}
+
