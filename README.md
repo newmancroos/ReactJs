@@ -235,3 +235,39 @@ will update person's city to Rockville, so we need to shadow copy child object a
 
 const updatedPerson = {...person, address:{...person.address, city:Rockville}, name:"Nithin"}
 
+##Immer
+Immer is a open source javascript library which produces immutable instance of an object.
+
+const baseState = [
+    {
+        title: "Learn TypeScript",
+        done: true
+    },
+    {
+        title: "Try Immer",
+        done: false
+    }
+]
+
+Without Immer:
+const nextState = baseState.slice() // shallow clone the array
+nextState[1] = {
+    // replace element 1...
+    ...nextState[1], // with a shallow clone of element 1
+    done: true // ...combined with the desired update
+}
+// since nextState was freshly cloned, using push is safe here,
+// but doing the same thing at any arbitrary time in the future would
+// violate the immutability principles and introduce a bug!
+nextState.push({title: "Tweet about it"})
+
+With Immer:
+import {produce} from "immer"
+
+const nextState = produce(baseState, draft => {
+    draft[1].done = true
+    draft.push({title: "Tweet about it"})
+})
+![image](https://github.com/user-attachments/assets/beca239a-c6f2-43a4-9c43-7a0c83c5360b)
+
+
