@@ -235,7 +235,7 @@ will update person's city to Rockville, so we need to shadow copy child object a
 
 const updatedPerson = {...person, address:{...person.address, city:Rockville}, name:"Nithin"}
 
-##Immer
+## Immer
 Immer is a open source javascript library which produces immutable instance of an object.
 
 const baseState = [
