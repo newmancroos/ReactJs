@@ -238,6 +238,7 @@ const updatedPerson = {...person, address:{...person.address, city:Rockville}, n
 ## Immer
 Immer is a open source javascript library which produces immutable instance of an object.
 
+<pre>
 const baseState = [
     {
         title: "Learn TypeScript",
@@ -248,9 +249,13 @@ const baseState = [
         done: false
     }
 ]
-
+</pre>
+<br/>
 Without Immer:
+
+<pre>
 const nextState = baseState.slice() // shallow clone the array
+
 nextState[1] = {
     // replace element 1...
     ...nextState[1], // with a shallow clone of element 1
@@ -260,14 +265,17 @@ nextState[1] = {
 // but doing the same thing at any arbitrary time in the future would
 // violate the immutability principles and introduce a bug!
 nextState.push({title: "Tweet about it"})
+</pre>
 
 With Immer:
 import {produce} from "immer"
 
+<pre>
 const nextState = produce(baseState, draft => {
     draft[1].done = true
     draft.push({title: "Tweet about it"})
 })
+</pre>
 ![image](https://github.com/user-attachments/assets/beca239a-c6f2-43a4-9c43-7a0c83c5360b)
 
 
