@@ -1,4 +1,4 @@
-import {parseISO, formatDistanceToNow} from 'date-fns'
+import {parseISO, formatDistanceToNow} from 'date-fns' //npm install date-fns
 
 const TimeAge = ({timestamp}) => {
     let timeage=''

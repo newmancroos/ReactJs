@@ -1,5 +1,5 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-import { sub } from "date-fns";
+import { sub } from "date-fns"; //npm install date-fns
 
 const initialState=[
     {
@@ -62,7 +62,7 @@ const postsSlice= createSlice({
         },
         reactionAdded(state,action){
             const{postId, reaction}= action.payload
-            const existingPost = state.find(post => post.id= postId)
+            const existingPost = state.find(post => post.id=== postId)
 
             if(existingPost)
             {
