@@ -163,4 +163,119 @@ class Head extends React.Component {
 <h3><u>React-Redux Tutorial</u></h3>
 https://www.youtube.com/watch?v=upFPU1HWAUk
 
+## Redux funtionality:
+
+![image](https://github.com/user-attachments/assets/c7da4c7e-1c26-47f9-9fb1-7afb8e414fad)
+
+
+
+lodash - is a repository for small functions. We can install loadash  using the command : npm i lodash
+
+
+Note :
+##currying function:
+
+function parent(a)
+{
+    return function child(b)
+    {
+        console.log(a+b);
+    }
+}
+
+const add = a => b => a+b;
+
+parent(2)(4)
+console.log(add(3)(4))
+
+## Pure function
+When a function always returning same output for a same input is called Pure function
+ex.
+	function(age)
+ 	{
+		return age * 2
+	}
+
+ this function always return same resule for a particular number. but
+
+ funcrtion randaomNumber(number)
+ {
+ 	return number * Math.random()
+ }
+
+ this function may return different result for a number.
+
+ In Redux, reducers should be pure function.
+
+## Immutable object
+In redux immutab;le object is a pillor of the Redux. How to create Immutable object in javascript
+ex.
+const person={
+name : "Newman"
+}
+
+const updatedPerson = {...person, name="Nithin"}
+
+here we copy person object and change the value of the name so we'll have a new object with differnt value.
+this is how redux maintains new state of the object and old states will be immutable.
+
+If I have nested object in side a object when we use shadow operator we need to shadow copy nested object too. otherwise updating child object will update parent object.
+
+const person={
+name : "Newman"
+address:{
+	city:"Silver Spring",
+ 	Country:"USA"
+}
+}
+
+const updatedPerson = {...person}
+updatedPerson.City="Rockville
+will update person's city to Rockville, so we need to shadow copy child object as below,
+
+const updatedPerson = {...person, address:{...person.address, city:Rockville}, name:"Nithin"}
+
+## Immer
+Immer is a open source javascript library which produces immutable instance of an object.
+
+<pre>
+const baseState = [
+    {
+        title: "Learn TypeScript",
+        done: true
+    },
+    {
+        title: "Try Immer",
+        done: false
+    }
+]
+</pre>
+<br/>
+Without Immer:
+
+<pre>
+const nextState = baseState.slice() // shallow clone the array
+
+nextState[1] = {
+    // replace element 1...
+    ...nextState[1], // with a shallow clone of element 1
+    done: true // ...combined with the desired update
+}
+// since nextState was freshly cloned, using push is safe here,
+// but doing the same thing at any arbitrary time in the future would
+// violate the immutability principles and introduce a bug!
+nextState.push({title: "Tweet about it"})
+</pre>
+
+With Immer:
+import {produce} from "immer"
+
+<pre>
+const nextState = produce(baseState, draft => {
+    draft[1].done = true
+    draft.push({title: "Tweet about it"})
+})
+</pre>
+![image](https://github.com/user-attachments/assets/beca239a-c6f2-43a4-9c43-7a0c83c5360b)
+
 
