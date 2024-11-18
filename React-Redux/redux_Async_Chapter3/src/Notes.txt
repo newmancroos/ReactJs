@@ -1,0 +1,19 @@
+//Currying function
+-------------------
+function Add(a)
+{
+  return function(b)
+  {
+    return a+b
+  }
+}
+
+const Add2 = a => b => c =>a+b+c
+
+console.log(Add(4)(15))
+console.log(Add2(4)(7)(10))
+===================================
+Install Redux toolkit
+----------------------
+npm install @reduxjs/toolkit
+npm install react-redux
