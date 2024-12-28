@@ -4,6 +4,7 @@ import { nanoid } from "@reduxjs/toolkit";
 //import { postAdded } from "./postsSlice";  
 import { addNewPost } from "./postsSlice"; //We use this new extraReducer method instead of above one
 import { selectAllUsers } from "../users/usersSlice";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 const AddPostForm = () =>{
@@ -13,7 +14,7 @@ const AddPostForm = () =>{
     const[content,setContent] = useState('')
     const[userId, setUserId]= useState('');
     const users = useSelector(selectAllUsers)
-
+    const navigate = useNavigate();
     const [addRequestStatus,setAddRequestStatus]= useState('idel')
 
     const onTitleChanged = e => setTitle(e.target.value)
@@ -48,6 +49,7 @@ const AddPostForm = () =>{
                 setTitle('')
                 setContent('')
                 setUserId('')
+                navigate('/')
             }
             catch(err)
             {
