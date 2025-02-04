@@ -1,4 +1,4 @@
-import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, nanoid, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 import { sub } from 'date-fns';
 import axios from "axios";
 
@@ -7,7 +7,8 @@ const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
 const initialState = {
     posts: [],
     status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
-    error: null
+    error: null,
+    count:0
 }
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
@@ -77,6 +78,10 @@ const postsSlice = createSlice({
             if (existingPost) {
                 existingPost.reactions[reaction]++
             }
+        },
+        increaseCount(state,action)
+        {
+            state.count = state.count + 1
         }
     },
     extraReducers(builder) {
@@ -152,8 +157,14 @@ const postsSlice = createSlice({
 export const selectAllPosts = (state) => state.posts.posts;
 export const getPostsStatus = (state) => state.posts.status;
 export const getPostsError = (state) => state.posts.error;
+export const getCount = (state) => state.posts.count;
 export const selectPostById = (state, postId) => 
     state.posts.posts.find(post => post.id === postId);
-export const { postAdded, reactionAdded } = postsSlice.actions
+export const { postAdded, reactionAdded, increaseCount } = postsSlice.actions
 
+export const selectPostsByUser = createSelector([selectAllPosts, (state,userId)=> userId], (posts, userId) => posts.filter(post => post.userId === userId))
+//createSelector accept two parameters, first one is array of functions, second the output of the first parameter(s)
+// selectAllPosts function returns all the posts, (state,userId)=> userId returns userId. Second parameter is out put of the array of function, that is Posts and userId
+//this process is called memoization.
+//Memoization in React is an optimization technique used to avoid unnecessary re-renders of components by caching the results of expensive function calls and reusing them when the same inputs occur again
 export default postsSlice.reducer
