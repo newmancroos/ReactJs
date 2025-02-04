@@ -281,5 +281,5 @@ const nextState = produce(baseState, draft => {
 
 ### createEntityAdapter
 
-A function that generate s set of prebuilt reducers and selecotrs for performing CRUD operations on a <b>normalized state strucutre</b> containing instances of a particular types of data object. These reducer functions may be passed as case reducers to createReducer and createSlice. They may also be used as "mutating" helper functions inside of createReducer and createSlice.
+A function that generate s set of prebuilt reducers and selecotrs for performing CRUD operations on a <b>normalized state strucutre</b> containing instances of a particular types of data object. These reducer functions may be passed as case reducers to createReducer and createSlice. They may also be used as "mutating" helper functions inside of createReducer and createSlice.<br/>
 Reference : https://redux-toolkit.js.org/api/createEntityAdapter
